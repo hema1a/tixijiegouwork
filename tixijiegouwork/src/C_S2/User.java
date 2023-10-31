@@ -17,25 +17,6 @@ class Tongxunlu<Jpanel> {
 
         Tongxunlu u=new Tongxunlu();
         u.init();
-        /*u.setLoginName("zkr");
-        u.setPassword("4100");
-        u.setGender("女");
-        u.setAge(20);
-        u.setName("张凯");//本来是张三三，改成李四，调用update方法
-        TongxunluDao dao=new TongxunluDaoImpl();*/
-
-        //dao.add(u);//添加数据时使用-----增
-        //dao.update(2,u);//修改or更新数据使用-----改
-        //dao.delete(2);//删除数据------删
-        /*List<Tongxunlu> Tongxunlus=dao.findAll();//查询数据-----查
-        for(Tongxunlu s:Tongxunlus){
-            System.out.println(s.getId()+"\t"
-            +s.getLoginName()+"\t"
-            +s.getPassword()+"\t"
-            +s.getName()+"\t"
-            +s.getAge()+"\t"
-            +s.getGender());
-        }*/
 
 
     }
@@ -52,11 +33,11 @@ class Tongxunlu<Jpanel> {
 
 
     public void init(){
-        frame =new JFrame("数据库");
-        button1 =new JButton("添加数据");
-        button2 =new JButton("删除数据");
-        button3 =new JButton("更改数据");
-        button4 =new JButton("查询数据");
+        frame =new JFrame("个人通讯录");
+        button1 =new JButton("添加联系人");
+        button2 =new JButton("删除联系人");
+        button3 =new JButton("更改联系人信息");
+        button4 =new JButton("查询所有联系人");
 
         panel1 =new JPanel();
         panel1.setLayout(layout);
@@ -75,7 +56,7 @@ class Tongxunlu<Jpanel> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String command = e.getActionCommand();
-                if (command.equals("添加数据")){
+                if (command.equals("添加联系人")){
                     Tongxunlu u=new Tongxunlu();
                     u.tanchuang();
                 }
@@ -86,7 +67,7 @@ class Tongxunlu<Jpanel> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String command = e.getActionCommand();
-                if (command.equals("删除数据")){
+                if (command.equals("删除联系人")){
                     TongxunluDao dao=new TongxunluDaoImpl();
                     String pname=null;
                     System.out.println("请输入需要删除的人的姓名：");
@@ -100,7 +81,7 @@ class Tongxunlu<Jpanel> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String command = e.getActionCommand();
-                if(command.equals("更改数据")){
+                if(command.equals("更改联系人")){
                     Tongxunlu u=new Tongxunlu();
                     u.genggai();
                 }
@@ -110,10 +91,10 @@ class Tongxunlu<Jpanel> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String command = e.getActionCommand();
-                if(command.equals("查询数据")){
+                if(command.equals("查询联系人")){
 
                     TongxunluDao dao=new TongxunluDaoImpl();
-                    List<Tongxunlu> Tongxunlus=dao.findAll();//查询数据-----查
+                    List<Tongxunlu> Tongxunlus=dao.findAll();//查询联系人-----查
                     for(Tongxunlu s:Tongxunlus){
                         System.out.println(s.getName()+"\t"
                                 +s.getNumber()+"\t"
@@ -267,8 +248,8 @@ class Tongxunlu<Jpanel> {
 
 
 
-//链接数据库
-    public static class DBUtil{//数据库建立连接
+//链接联系人库
+    public static class DBUtil{//联系人库建立连接
         static String url="jdbc:mysql:"+"//localhost:3306/testdb";
         static String root="root";
         static String password="root123";
@@ -341,7 +322,7 @@ class Tongxunlu<Jpanel> {
 
         @Override
         public void delete(String name) {
-            //数据库连接对象
+            //联系人联系人库连接对象
             Connection con=DBUtil.getCon();
             //定义sql语句
             String sql="delete from Tongxunlu where name=?";
